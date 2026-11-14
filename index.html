@@ -103,8 +103,8 @@ footer{text-align:center;color:#756f67;font-size:12px;padding:18px}
  <button class="btn primary" style="width:100%" onclick="saveEmployee()">حفظ بيانات الموظف</button><div id="employeeMsg" class="notice hidden"></div>
 </div></div>
 <script>
-/* الرابط المحدث لـ Google Apps Script */
-const API_URL = 'https://script.google.com/macros/s/AKfycbyEKed6PRH2vIGrMRWVIO8Uz-SOz_HA0zAoq9kmkn8_4bKG3fJGNj9RxVPMC4kpGuzK/exec';
+/* الرابط المحدث والجاهز */
+const API_URL = 'https://script.google.com/macros/s/AKfycbxWiEW9il65i9rw8oulmy0CVpk4LIMkVmOwqqXwasSZcLdHnS4HghvHhpA1q8jrDYAsq/exec';
 const $ = id => document.getElementById(id);
 let token='', role='', currentUser=null, employees=[], logs=[], reportData=[], selfieData='', stream=null, heartbeatTimer=null, pollTimer=null;
 const deviceName = () => navigator.userAgent.slice(0,110);
