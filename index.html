@@ -103,14 +103,14 @@ footer{text-align:center;color:#756f67;font-size:12px;padding:18px}
  <button class="btn primary" style="width:100%" onclick="saveEmployee()">حفظ بيانات الموظف</button><div id="employeeMsg" class="notice hidden"></div>
 </div></div>
 <script>
-/* الرابط المحدث والجاهز */
-const API_URL = 'https://script.google.com/macros/s/AKfycbxWiEW9il65i9rw8oulmy0CVpk4LIMkVmOwqqXwasSZcLdHnS4HghvHhpA1q8jrDYAsq/exec';
+/* الرابط الجديد المضاف بدقة */
+const API_URL = 'https://script.google.com/macros/s/AKfycbw9FHPrq0WdSxNPuG_HguleV5bZ6OlPrwfc5P7J8PLTVWcjHEJt61IbFwWeTRsYNGFx/exec';
 const $ = id => document.getElementById(id);
 let token='', role='', currentUser=null, employees=[], logs=[], reportData=[], selfieData='', stream=null, heartbeatTimer=null, pollTimer=null;
 const deviceName = () => navigator.userAgent.slice(0,110);
 function msg(id,text,type=''){const el=$(id);el.textContent=text;el.className='notice '+type;el.classList.remove('hidden')}
 function hide(id){$(id).classList.add('hidden')}
-function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;}[c]))}
 async function api(action,data={}) {
  if(!API_URL || API_URL.includes('ضع_رابط')) throw new Error('أضف رابط Google Apps Script المنشور في متغير API_URL داخل index.html');
  const response=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,token,...data}),redirect:'follow'});
