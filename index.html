@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#b8aa96"><title>بصمة | الحضور والانصراف</title>
+<style>
+:root{--sand:#c9bba7;--sand2:#e8dfd3;--paper:#f7f4ef;--ink:#393936;--muted:#77736d;--line:#ddd5ca;--gray:#65645f;--green:#387b59;--red:#a84f49;--shadow:0 12px 35px #4b403018}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#eee8df,#d7d1c8);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer;border:0} .hidden{display:none!important}
+header{position:sticky;top:0;z-index:5;background:#d4c8b8ed;backdrop-filter:blur(12px);border-bottom:1px solid #ffffff70}
+.top{max-width:1200px;margin:auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px}.logo{width:46px;height:46px;border-radius:15px;background:#f8f4ed;display:grid;place-items:center;font-size:25px;box-shadow:var(--shadow)}.brand h1{font-size:22px;margin:0;letter-spacing:.5px}.brand small{color:#625d56}
+.status{font-size:12px;color:#555;background:#f6f2ec;padding:8px 11px;border-radius:99px}
+.ticker{overflow:hidden;background:#595a58;color:#f8f2e9;white-space:nowrap;padding:8px 0;font-weight:700;letter-spacing:1px}
+.ticker span{display:inline-block;padding-right:100%;animation:slide 18s linear infinite}@keyframes slide{to{transform:translateX(100%)}}
+main{max-width:1200px;margin:24px auto;padding:0 16px 50px}.panel{background:#faf8f4;border:1px solid #fff;border-radius:22px;padding:20px;box-shadow:var(--shadow);margin-bottom:18px}
+h2{margin:0 0 15px;font-size:21px}h3{margin:0 0 12px;font-size:17px}.muted{color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.stat{background:linear-gradient(145deg,#eee8df,#fff);border:1px solid var(--line);border-radius:17px;padding:16px}.stat b{font-size:27px;display:block}.stat span{font-size:13px;color:var(--muted)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.between{justify-content:space-between}.field{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1}.field label{font-size:13px;color:#625e58}input,select{width:100%;border:1px solid #d7cfc4;background:white;border-radius:12px;padding:12px;color:var(--ink);outline:none}input:focus,select:focus{border-color:#998873;box-shadow:0 0 0 3px #c9bba733}
+.btn{padding:11px 16px;border-radius:12px;background:#625f59;color:#fff;font-weight:650}.btn.primary{background:#8f7e68}.btn.light{background:#e8e1d7;color:#46433e}.btn.danger{background:#a84f49}.btn.green{background:#387b59}.btn:disabled{opacity:.5;cursor:not-allowed}
+.tabs{display:flex;gap:8px;overflow:auto;margin:0 0 16px}.tab{white-space:nowrap;padding:10px 14px;border-radius:12px;background:#e8e1d7;color:#504b44}.tab.active{background:#625f59;color:white}
+table{width:100%;border-collapse:collapse;min-width:650px}th,td{padding:11px 9px;border-bottom:1px solid #e7e0d7;text-align:right;font-size:13px}th{color:#6e675e;background:#f2eee8}
+.tablewrap{overflow:auto;border:1px solid #e7e0d7;border-radius:14px}.pill{display:inline-block;border-radius:99px;padding:5px 9px;font-size:11px;background:#e8e1d7}.pill.ok{background:#dcebe1;color:#286344}.pill.bad{background:#f4dfdc;color:#8b3934}.pill.warn{background:#f5ebd5;color:#876528}
+.login{max-width:440px;margin:8vh auto}.login .panel{padding:26px}.login .brand{justify-content:center;margin-bottom:20px}.login .brand h1{font-size:27px}
+.notice{padding:12px 14px;border-radius:12px;background:#f0e9df;color:#62584c;font-size:13px;margin:10px 0}.error{background:#f7e5e2;color:#8c3d36}.success{background:#e1eee5;color:#2e6545}
+.actions{display:flex;gap:6px;flex-wrap:wrap}.actions button{padding:7px 10px;font-size:12px;border-radius:9px}
+.camera{width:100%;max-height:300px;background:#242424;border-radius:15px;object-fit:cover}.preview{width:100%;max-height:260px;object-fit:contain;border-radius:14px;background:#eee}
+.modalback{position:fixed;inset:0;background:#1e1e1ecc;z-index:20;display:grid;place-items:center;padding:15px}.modal{width:min(560px,100%);max-height:90vh;overflow:auto;background:#faf8f4;border-radius:20px;padding:20px}
+footer{text-align:center;color:#756f67;font-size:12px;padding:18px}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.panel{padding:15px;border-radius:18px}.top{padding:10px 13px}.status{font-size:11px}.brand h1{font-size:19px}.login{margin:5vh auto}}
+@media(max-width:380px){.grid{grid-template-columns:1fr 1fr}.btn{padding:10px 12px}}
+</style></head>
+<body>
+<header><div class="top"><div class="brand"><div class="logo">👷‍♂️</div><div><h1>بصمة</h1><small>نظام الحضور والانصراف</small></div></div><div class="row"><span id="connection" class="status">غير متصل</span><button id="logoutBtn" class="btn light hidden" onclick="logout()">خروج</button></div></div></header>
+<div class="ticker"><span>👷‍♂️ ✨ بصمة ✨ 👷‍♂️　　👷‍♂️ ✨ بصمة ✨ 👷‍♂️　　👷‍♂️ ✨ بصمة ✨ 👷‍♂️</span></div>
+<main>
+<section id="loginView" class="login">
+ <div class="panel"><div class="brand"><div class="logo">👷‍♂️</div><div><h1>بصمة</h1><small>أهلاً بك في نظام الحضور</small></div></div>
+ <div class="notice">الدخول متاح للموظفين الذين أنشأ المشرف حساباتهم فقط.</div>
+ <div class="field"><label>اسم المستخدم</label><input id="loginUser" autocomplete="username" placeholder="اسم المستخدم"></div>
+ <div class="field" style="margin-top:12px"><label>كود الدخول</label><input id="loginPass" type="password" autocomplete="current-password" placeholder="كود الدخول"></div>
+ <button class="btn primary" style="width:100%;margin-top:17px" onclick="login()">تسجيل الدخول</button><div id="loginMsg" class="notice hidden"></div>
+ <p class="muted" style="text-align:center">بيانات الدخول سرية ولا تُعرض في الصفحة.</p>
+ </div>
+</section>
+<section id="appView" class="hidden">
+ <div class="row between" style="margin:0 2px 15px"><div><h2 id="welcome">مرحباً</h2><div class="muted" id="todayLabel"></div></div><span id="rolePill" class="pill">حساب</span></div>
+ <div id="adminView" class="hidden">
+  <div class="grid" id="stats"></div>
+  <div class="panel" style="margin-top:18px">
+   <div class="tabs">
+    <button class="tab active" data-tab="overview" onclick="showTab('overview',this)">نظرة عامة</button>
+    <button class="tab" data-tab="employees" onclick="showTab('employees',this)">الموظفون</button>
+    <button class="tab" data-tab="logs" onclick="showTab('logs',this)">سجل البصمات</button>
+    <button class="tab" data-tab="reports" onclick="showTab('reports',this)">التقارير</button>
+   </div>
+   <div id="tab-overview">
+    <h3>حركة اليوم</h3><div class="tablewrap"><table><thead><tr><th>الموظف</th><th>الحضور</th><th>الانصراف</th><th>الحالة</th></tr></thead><tbody id="todayRows"></tbody></table></div>
+   </div>
+   <div id="tab-employees" class="hidden">
+    <div class="row between"><h3>بيانات الموظفين</h3><button class="btn primary" onclick="openEmployee()">+ إضافة موظف</button></div>
+    <div class="muted" style="margin-bottom:10px">أنشئ اسم المستخدم والكود المكون من 4 أحرف أو أرقام، ثم أرسله للموظف بشكل خاص.</div>
+    <div class="tablewrap"><table><thead><tr><th>الاسم</th><th>اسم المستخدم</th><th>القسم</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="employeeRows"></tbody></table></div>
+   </div>
+   <div id="tab-logs" class="hidden">
+    <div class="row between"><h3>جميع البصمات</h3><input id="logSearch" style="max-width:240px" placeholder="بحث بالاسم أو التاريخ" oninput="renderLogs()"></div>
+    <div class="tablewrap"><table><thead><tr><th>الموظف</th><th>النوع</th><th>التاريخ</th><th>الساعة</th><th>الحالة</th><th>الصورة</th></tr></thead><tbody id="logRows"></tbody></table></div>
+   </div>
+   <div id="tab-reports" class="hidden">
+    <h3>تقرير الفترة</h3><div class="row">
+     <div class="field"><label>من تاريخ</label><input type="date" id="fromDate"></div>
+     <div class="field"><label>إلى تاريخ</label><input type="date" id="toDate"></div>
+     <div class="field"><label>الموظف</label><select id="reportEmployee"><option value="">كل الموظفين</option></select></div>
+     <button class="btn primary" onclick="makeReport()">عرض التقرير</button>
+    </div>
+    <div class="row" style="margin:12px 0"><button class="btn light" onclick="exportCSV()">تصدير Excel (CSV)</button><button class="btn light" onclick="window.print()">طباعة</button></div>
+    <div class="tablewrap"><table><thead><tr><th>الموظف</th><th>النوع</th><th>التاريخ</th><th>الساعة</th><th>الحالة</th></tr></thead><tbody id="reportRows"></tbody></table></div>
+   </div>
+  </div>
+ </div>
+ <div id="employeeView" class="hidden">
+  <div class="grid">
+   <div class="stat"><b id="empTodayState">—</b><span>حالة اليوم</span></div>
+   <div class="stat"><b id="empPunchCount">0</b><span>بصمات اليوم</span></div>
+  </div>
+  <div class="panel" style="margin-top:18px">
+   <h2>تسجيل البصمة</h2><div class="notice">التقط صورة سيلفي واضحة قبل تأكيد الحضور أو الانصراف. وقت الدوام 08:00 صباحاً إلى 05:00 مساءً.</div>
+   <video id="camera" class="camera hidden" autoplay playsinline></video><canvas id="canvas" class="hidden"></canvas><img id="selfiePreview" class="preview hidden" alt="صورة البصمة">
+   <div class="row" style="margin-top:12px"><button class="btn light" onclick="startCamera()">فتح الكاميرا</button><button class="btn light" onclick="document.getElementById('selfieFile').click()">اختيار صورة</button><input id="selfieFile" type="file" accept="image/*" capture="user" class="hidden" onchange="loadSelfie(event)"></div>
+   <div class="row" style="margin-top:14px"><button id="inBtn" class="btn green" onclick="takePunch('حضور')">تسجيل الحضور</button><button id="outBtn" class="btn primary" onclick="takePunch('انصراف')">تسجيل الانصراف</button></div>
+   <div id="punchMsg" class="notice hidden"></div>
+  </div>
+  <div class="panel"><h3>سجل بصماتي</h3><div class="tablewrap"><table><thead><tr><th>النوع</th><th>التاريخ</th><th>الساعة</th><th>الحالة</th></tr></thead><tbody id="myLogs"></tbody></table></div></div>
+ </div>
+</section>
+</main>
+<footer>بصمة 👷‍♂️ — نظام الحضور والانصراف</footer>
+<div id="employeeModal" class="modalback hidden"><div class="modal"><div class="row between"><h2 id="employeeModalTitle">إضافة موظف</h2><button class="btn light" onclick="closeEmployee()">إغلاق</button></div>
+ <input id="editId" type="hidden"><div class="field"><label>اسم الموظف</label><input id="empName" placeholder="الاسم الكامل"></div>
+ <div class="field" style="margin-top:10px"><label>اسم المستخدم</label><input id="empUsername" placeholder="مثال: ahmed01"></div>
+ <div class="field" style="margin-top:10px"><label>كود الدخول (4 أحرف/أرقام)</label><input id="empCode" maxlength="4" autocomplete="new-password" placeholder="أدخل كوداً جديداً"></div>
+ <div class="field" style="margin-top:10px"><label>القسم</label><input id="empDept" placeholder="عام"></div>
+ <div class="notice">الكود لا يُعرض مرة أخرى بعد الحفظ؛ احتفظ به وأرسله للموظف بطريقة خاصة.</div>
+ <button class="btn primary" style="width:100%" onclick="saveEmployee()">حفظ بيانات الموظف</button><div id="employeeMsg" class="notice hidden"></div>
+</div></div>
+<script>
+/* الرابط المحدث لـ Google Apps Script */
+const API_URL = 'https://script.google.com/macros/s/AKfycbyEKed6PRH2vIGrMRWVIO8Uz-SOz_HA0zAoq9kmkn8_4bKG3fJGNj9RxVPMC4kpGuzK/exec';
+const $ = id => document.getElementById(id);
+let token='', role='', currentUser=null, employees=[], logs=[], reportData=[], selfieData='', stream=null, heartbeatTimer=null, pollTimer=null;
+const deviceName = () => navigator.userAgent.slice(0,110);
+function msg(id,text,type=''){const el=$(id);el.textContent=text;el.className='notice '+type;el.classList.remove('hidden')}
+function hide(id){$(id).classList.add('hidden')}
+function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+async function api(action,data={}) {
+ if(!API_URL || API_URL.includes('ضع_رابط')) throw new Error('أضف رابط Google Apps Script المنشور في متغير API_URL داخل index.html');
+ const response=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,token,...data}),redirect:'follow'});
+ if(!response.ok) throw new Error('تعذر الاتصال بالخادم ('+response.status+')');
+ const result=await response.json(); if(result.status!=='success') throw new Error(result.message||'حدث خطأ'); return result;
+}
+async function login(){
+ const username=$('loginUser').value.trim(),password=$('loginPass').value;
+ try{msg('loginMsg','جارٍ تسجيل الدخول...');const r=await api('login',{username,password,device:deviceName()});token=r.token;role=r.role;currentUser=r.user;$('loginPass').value='';hide('loginMsg');$('loginView').classList.add('hidden');$('appView').classList.remove('hidden');$('logoutBtn').classList.remove('hidden');$('welcome').textContent='مرحباً '+(currentUser.name||currentUser.username);$('rolePill').textContent=role==='admin'?'مشرف':'موظف';$('todayLabel').textContent=new Date().toLocaleDateString('ar-SA',{weekday:'long',year:'numeric',month:'long',day:'numeric'});$('connection').textContent='متصل';if(role==='admin'){$('adminView').classList.remove('hidden');$('employeeView').classList.add('hidden')}else{$('employeeView').classList.remove('hidden');$('adminView').classList.add('hidden')}await sync();startBackground();}
+ catch(e){msg('loginMsg',e.message,'error')}
+}
+async function sync(){const r=await api('syncAll');employees=r.employees||[];logs=r.logs||[];if(role==='admin')renderAdmin(r.dashboard||{});else renderEmployee();$('connection').textContent='متصل';}
+function startBackground(){clearInterval(heartbeatTimer);clearInterval(pollTimer);heartbeatTimer=setInterval(()=>api('heartbeat',{device:deviceName()}).catch(()=>{$('connection').textContent='انقطع الاتصال'}),45000);pollTimer=setInterval(()=>sync().catch(()=>{$('connection').textContent='انقطع الاتصال'}),15000)}
+async function logout(){try{await api('logout')}catch(e){}clearInterval(heartbeatTimer);clearInterval(pollTimer);if(stream)stream.getTracks().forEach(t=>t.stop());token='';role='';currentUser=null;$('appView').classList.add('hidden');$('logoutBtn').classList.add('hidden');$('loginView').classList.remove('hidden');$('connection').textContent='غير متصل'}
+function renderAdmin(d){
+ $('stats').innerHTML=[['إجمالي الموظفين',d.total??employees.length],['الحضور اليوم',d.present??0],['المنصرفون',d.left??0],['المتصلون الآن',d.online??0],['الغياب حتى الآن',d.absent??0]].map(x=>`<div class="stat"><b>${x[1]}</b><span>${x[0]}</span></div>`).join('');
+ const today=new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Riyadh'}), rows=logs.filter(x=>String(x.Date).slice(0,10)===today);
+ const by={};rows.forEach(x=>{by[x.EmpID]??={name:x.EmpName,in:'—',out:'—'};if(x.Type==='حضور')by[x.EmpID].in=x.Time;if(x.Type==='انصراف')by[x.EmpID].out=x.Time});
+ $('todayRows').innerHTML=employees.map(e=>{const x=by[e.ID];return `<tr><td>${escapeHtml(e.Name)}</td><td>${x?escapeHtml(x.in):'—'}</td><td>${x?escapeHtml(x.out):'—'}</td><td><span class="pill ${x?'ok':'bad'}">${x?(x.out==='—'?'حاضر':'انصرف'):'غائب'}</span></td></tr>`}).join('')||'<tr><td colspan="4">لا توجد بيانات موظفين</td></tr>';
+ $('employeeRows').innerHTML=employees.map(e=>`<tr><td>${escapeHtml(e.Name)}</td><td>${escapeHtml(e.Username)}</td><td>${escapeHtml(e.Department||'عام')}</td><td><span class="pill ${String(e.Active)==='false'?'bad':'ok'}">${String(e.Active)==='false'?'موقوف':'نشط'}</span></td><td><div class="actions"><button class="btn light" onclick="editEmployee('${escapeHtml(e.ID)}')">تعديل</button><button class="btn light" onclick="toggleEmployee('${escapeHtml(e.ID)}',${String(e.Active)!=='false'})">${String(e.Active)==='false'?'تفعيل':'إيقاف'}</button><button class="btn danger" onclick="deleteEmployee('${escapeHtml(e.ID)}')">حذف</button></div></td></tr>`).join('');
+ $('reportEmployee').innerHTML='<option value="">كل الموظفين</option>'+employees.map(e=>`<option value="${escapeHtml(e.ID)}">${escapeHtml(e.Name)}</option>`).join('');
+ renderLogs();
+}
+function renderLogs(){const q=($('logSearch')?.value||'').toLowerCase();$('logRows').innerHTML=logs.filter(x=>(String(x.EmpName)+' '+String(x.Date)).toLowerCase().includes(q)).slice().reverse().map(x=>`<tr><td>${escapeHtml(x.EmpName)}</td><td>${escapeHtml(x.Type)}</td><td>${escapeHtml(String(x.Date).slice(0,10))}</td><td>${escapeHtml(x.Time)}</td><td>${escapeHtml(x.Status)}</td><td>${x.SelfieUrl?`<a href="${escapeHtml(x.SelfieUrl)}" target="_blank" rel="noopener">فتح الصورة</a>`:'—'}</td></tr>`).join('')}
+function renderEmployee(){const today=new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Riyadh'}),mine=logs.filter(x=>String(x.Date).slice(0,10)===today);$('empPunchCount').textContent=mine.length;$('empTodayState').textContent=mine.some(x=>x.Type==='انصراف')?'انصرف':mine.some(x=>x.Type==='حضور')?'حاضر':'لم يبصم';$('myLogs').innerHTML=logs.slice().reverse().slice(0,60).map(x=>`<tr><td>${escapeHtml(x.Type)}</td><td>${escapeHtml(String(x.Date).slice(0,10))}</td><td>${escapeHtml(x.Time)}</td><td>${escapeHtml(x.Status)}</td></tr>`).join('')}
+function showTab(name,btn){document.querySelectorAll('[id^="tab-"]').forEach(x=>x.classList.add('hidden'));$('tab-'+name).classList.remove('hidden');document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));btn.classList.add('active')}
+function openEmployee(e){$('employeeModalTitle').textContent=e?'تعديل موظف':'إضافة موظف';$('editId').value=e?.ID||'';$('empName').value=e?.Name||'';$('empUsername').value=e?.Username||'';$('empCode').value='';$('empDept').value=e?.Department||'عام';hide('employeeMsg');$('employeeModal').classList.remove('hidden')}
+function closeEmployee(){$('employeeModal').classList.add('hidden')}
+function editEmployee(id){const e=employees.find(x=>x.ID===id);if(e)openEmployee(e)}
+async function saveEmployee(){const id=$('editId').value,body={id,name:$('empName').value.trim(),username:$('empUsername').value.trim(),code:$('empCode').value.trim(),department:$('empDept').value.trim()};try{if(!body.name||!body.username)throw new Error('أدخل الاسم واسم المستخدم');if(!id&&!/^[A-Za-z0-9]{4}$/.test(body.code))throw new Error('الكود يجب أن يكون 4 أحرف أو أرقام إنجليزية');if(id&&body.code&&!/^[A-Za-z0-9]{4}$/.test(body.code))throw new Error('الكود الجديد يجب أن يكون 4 أحرف أو أرقام');await api(id?'updateEmployee':'addEmployee',body);msg('employeeMsg','تم حفظ بيانات الموظف. '+(body.code?'أرسل الكود للموظف الآن بشكل خاص.':'لا يظهر الكود القديم مرة أخرى.'),'success');await sync();setTimeout(closeEmployee,1300)}catch(e){msg('employeeMsg',e.message,'error')}}
+async function deleteEmployee(id){if(!confirm('هل تريد حذف الموظف؟'))return;try{await api('deleteEmployee',{id});await sync()}catch(e){alert(e.message)}}
+async function toggleEmployee(id,currentlyActive){try{await api('setEmployeeActive',{id,active:!currentlyActive});await sync()}catch(e){alert(e.message)}}
+async function startCamera(){try{if(!navigator.mediaDevices?.getUserMedia)throw new Error('الكاميرا تحتاج HTTPS أو متصفحاً يدعمها');if(stream)stream.getTracks().forEach(t=>t.stop());stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false});$('camera').srcObject=stream;$('camera').classList.remove('hidden');hide('selfiePreview');}catch(e){msg('punchMsg',e.message,'error')}}
+function loadSelfie(ev){const f=ev.target.files[0];if(!f)return;if(f.size>8*1024*1024){msg('punchMsg','الصورة كبيرة جداً. اختر صورة أصغر من 8 ميجابايت','error');return}const reader=new FileReader();reader.onload=()=>{resizeImage(reader.result).then(data=>{selfieData=data;$('selfiePreview').src=data;$('selfiePreview').classList.remove('hidden');$('camera').classList.add('hidden')})};reader.readAsDataURL(f)}
+function resizeImage(data){return new Promise(resolve=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas'),scale=Math.min(1,1200/Math.max(im.width,im.height));c.width=Math.round(im.width*scale);c.height=Math.round(im.height*scale);c.getContext('2d').drawImage(im,0,0,c.width,c.height);resolve(c.toDataURL('image/jpeg',.78))};im.src=data})}
+async function takePunch(type){try{if(!selfieData&&$('camera').srcObject){const v=$('camera'),c=$('canvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);selfieData=c.toDataURL('image/jpeg',.78);$('selfiePreview').src=selfieData;$('selfiePreview').classList.remove('hidden')}if(!selfieData)throw new Error('التقط صورة سيلفي أولاً');$('inBtn').disabled=$('outBtn').disabled=true;const r=await api('punch',{type,selfie:selfieData,device:deviceName()});msg('punchMsg',r.message+' — '+r.punch.time,'success');selfieData='';if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}$('camera').classList.add('hidden');await sync()}catch(e){msg('punchMsg',e.message,'error')}finally{$('inBtn').disabled=$('outBtn').disabled=false}}
+async function makeReport(){try{const from=$('fromDate').value,to=$('toDate').value;if(!from||!to)throw new Error('حدد تاريخ البداية والنهاية');const r=await api('report',{from,to,empId:$('reportEmployee').value});reportData=r.logs||[];$('reportRows').innerHTML=reportData.map(x=>`<tr><td>${escapeHtml(x.EmpName)}</td><td>${escapeHtml(x.Type)}</td><td>${escapeHtml(String(x.Date).slice(0,10))}</td><td>${escapeHtml(x.Time)}</td><td>${escapeHtml(x.Status)}</td></tr>`).join('')||'<tr><td colspan="5">لا توجد نتائج</td></tr>'}catch(e){alert(e.message)}}
+function exportCSV(){if(!reportData.length){alert('اعرض التقرير أولاً');return}const cols=['EmpName','Type','Date','Time','Status'];const lines=[cols.join(','),...reportData.map(r=>cols.map(k=>'"'+String(r[k]??'').replace(/"/g,'""')+'"').join(','))];const blob=new Blob(['\ufeff'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Basma_Report.csv';a.click();URL.revokeObjectURL(url)}
+$('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')login()});$('loginUser').addEventListener('keydown',e=>{if(e.key==='Enter')$('loginPass').focus()});
+const now=new Date(),first=new Date(now.getFullYear(),now.getMonth(),1);$('fromDate').value=first.toLocaleDateString('en-CA');$('toDate').value=now.toLocaleDateString('en-CA');
+</script></body></html>
